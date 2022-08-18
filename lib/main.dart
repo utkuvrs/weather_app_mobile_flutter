@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app_mobile_flutter/views/additional_information.dart';
 import 'package:weather_app_mobile_flutter/views/current_weather.dart';
 
 void main() {
@@ -36,7 +37,25 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [currentWeather(Icons.wb_sunny_rounded, "26.3", "Georgia")],
+        children: [
+          currentWeather(Icons.wb_sunny_rounded, "26.3", "Georgia"),
+          const SizedBox(
+            height: 60.0,
+          ),
+          const Text(
+            "Additional Information",
+            style: TextStyle(
+                fontSize: 24.0,
+                color: Color(0xdd212121),
+                fontWeight: FontWeight.bold),
+          ),
+          const Divider(),
+          const SizedBox(
+            height: 20.0,
+          ),
+          // Adding additional information
+          additionalInformation("24", "2", "1014", "24.0"),
+        ],
       ),
     );
   }
