@@ -1,44 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app_mobile_flutter/views/current_weather.dart';
 
 void main() {
-  runApp(WeatherApp());
+  runApp(const MaterialApp(
+    home: HomePage(),
+  ));
 }
 
-class WeatherApp extends StatefulWidget {
-  const WeatherApp({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<WeatherApp> createState() => _WeatherAppState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _WeatherAppState extends State<WeatherApp> {
-  // Dynamic
-  final _cityTextController = TextEditingController();
-
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("AppBar Title"),
+    // Starting with the UI of the app.
+    return Scaffold(
+      backgroundColor: const Color(0xFFf9f9f9),
+      appBar: AppBar(
+        backgroundColor: const Color(0XFFf9f9f9),
+        elevation: 0.0,
+        title: const Text(
+          "Weather App",
+          style: TextStyle(color: Colors.black),
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(padding: EdgeInsets.symmetric(vertical: 50),
-              child: SizedBox(
-                width: 150,
-                child: TextField(
-                  controller: _cityTextController,
-                  decoration: InputDecoration(labelText: "City"),
-                  textAlign: TextAlign.center),
-                ),
-              ),
-              ElevatedButton(onPressed: () => {}, child: Text("Search"))
-            ],
-          ),
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.menu),
+          color: Colors.black,
         ),
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [currentWeather(Icons.wb_sunny_rounded, "26.3", "Georgia")],
       ),
     );
   }
