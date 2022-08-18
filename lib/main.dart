@@ -55,6 +55,8 @@ class _HomePageState extends State<HomePage> {
           ),
           // Adding additional information
           additionalInformation("24", "2", "1014", "24.0"),
+          // UI done.
+          // Integrate API
         ],
       ),
     );
