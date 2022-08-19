@@ -5,6 +5,8 @@ class Weather {
   int? humidity;
   int? pressure;
   double? feelsLike;
+  double? longitude;
+  double? latitude;
 
   Weather(
       {this.cityName,
@@ -12,7 +14,9 @@ class Weather {
       this.wind,
       this.humidity,
       this.feelsLike,
-      this.pressure});
+      this.pressure,
+      this.latitude,
+      this.longitude});
 
   // We are going to parse JSON data to weather models,
   // and after that we'll use it on the backend.
@@ -24,5 +28,7 @@ class Weather {
     humidity = json["main"]["humidity"];
     feelsLike = json["main"]["feels_like"];
     pressure = json["main"]["pressure"];
+    latitude = json["coord"]["lat"];
+    longitude = json["coord"]["lon"];
   }
 }
