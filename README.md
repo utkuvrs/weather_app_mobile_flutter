@@ -4,6 +4,9 @@
 
 ## Model - Backend
 
+> Model, holds the values that were retrieved from an API call, these values are later used in the front-end to show/interact with the end-user.
+> 
+
 ```dart
 class Weather {
   String? cityName;
@@ -36,6 +39,9 @@ class Weather {
 ```
 
 ## API - Weather Data
+
+> Requesting JSON data from our API in this case **openweathermap** and decoding it to `Weather` model in `model/weather_model.dart`
+> 
 
 ```dart
 import 'dart:convert';
@@ -81,7 +87,7 @@ Future signIn() async {
   }
 ```
 
-1. Check if the user has connected or not, if connected load Home Page
+1. Check if the user has connected or not, if connected load Home Page.
 
 ```dart
 class _LoginPageState extends State<LoginPage> {
