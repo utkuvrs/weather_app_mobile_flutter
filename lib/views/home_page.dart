@@ -85,3 +85,55 @@ class _HomePageState extends State<HomePage> {
         ));
   }
 }
+
+class NavigationDrawer extends StatelessWidget {
+  const NavigationDrawer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => Drawer(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              buildHeader(context),
+              buildMenuItems(context),
+            ],
+          ),
+        ),
+      );
+
+  Widget buildHeader(BuildContext context) => Container(
+        padding: EdgeInsets.only(
+          top: MediaQuery.of(context).padding.top,
+        ),
+      );
+  Widget buildMenuItems(BuildContext context) => Container(
+        padding: const EdgeInsets.all(24),
+        child: Wrap(
+          runSpacing: 16,
+          children: [
+            ListTile(
+                leading: const Icon(Icons.home_outlined),
+                title: const Text("Home"),
+                onTap: () => {}),
+            ListTile(
+              leading: const Icon(Icons.search_outlined),
+              title: const Text("Search"),
+              onTap: () => Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                      builder: (context) => const LocationPage())),
+            ),
+            ListTile(
+              leading: const Icon(Icons.door_sliding_outlined),
+              title: const Text("Sign out"),
+              onTap: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                );
+              },
+            ),
+          ],
+        ),
+      );
+}
