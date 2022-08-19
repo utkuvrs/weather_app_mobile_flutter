@@ -1,14 +1,17 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:weather_app_mobile_flutter/main.dart';
 
 import 'package:weather_app_mobile_flutter/services/weather_api_client.dart';
 import 'package:weather_app_mobile_flutter/views/additional_information.dart';
 import 'package:weather_app_mobile_flutter/views/current_weather.dart';
+import 'location_page.dart';
 
 import '../model/weather_model.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
+  final String locationName;
+  const HomePage({Key? key, required this.locationName}) : super(key: key);
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -23,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> getData() async {
-    data = (await client.getCurrentWeather("Samsun"))!;
+    data = (await client.getCurrentWeather(widget.locationName))!;
   }
 
   @override
@@ -45,6 +48,7 @@ class _HomePageState extends State<HomePage> {
             color: Colors.black,
           ),
         ),
+        drawer: const NavigationDrawer(),
         body: FutureBuilder(
           future: getData(),
           builder: (context, snapshot) {
