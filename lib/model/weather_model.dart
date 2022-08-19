@@ -20,7 +20,7 @@ class Weather {
   Weather.fromJson(Map<String, dynamic> json) {
     cityName = json["name"];
     temp = json["main"]["temp"];
-    wind = json["main"]["speed"];
+    wind = json["wind"]["speed"].toDouble();
     humidity = json["main"]["humidity"];
     feelsLike = json["main"]["feels_like"];
     pressure = json["main"]["pressure"];
