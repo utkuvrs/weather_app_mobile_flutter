@@ -28,7 +28,9 @@ class _LoginPageState extends State<LoginPage> {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return LocationPage();
+            return LocationPage(
+              weather: data,
+            );
           } else {
             return LoginWidget();
           }
