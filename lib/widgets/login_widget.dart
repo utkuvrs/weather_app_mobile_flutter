@@ -14,7 +14,6 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
@@ -23,11 +22,11 @@ class _LoginWidgetState extends State<LoginWidget> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 40,
           ),
           TextField(
@@ -36,16 +35,16 @@ class _LoginWidgetState extends State<LoginWidget> {
             textInputAction: TextInputAction.next,
             decoration: const InputDecoration(labelText: "E-mail"),
           ),
-          SizedBox(
+          const SizedBox(
             height: 4,
           ),
           TextField(
             controller: passwordController,
             textInputAction: TextInputAction.done,
-            decoration: InputDecoration(labelText: "Password"),
+            decoration: const InputDecoration(labelText: "Password"),
             obscureText: true,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           ElevatedButton.icon(
