@@ -1,6 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:weather_app_mobile_flutter/views/home_page.dart';
+import 'package:weather_app_mobile_flutter/widgets/login_widget.dart';
 
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MaterialApp(
     home: LoginPage(),
   ));
@@ -17,7 +23,16 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: LoginWidget(),
+      body: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return HomePage();
+          } else {
+            return LoginWidget();
+          }
+        },
+      ),
     );
   }
 }
