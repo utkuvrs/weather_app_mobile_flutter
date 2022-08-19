@@ -1,8 +1,8 @@
 # Weather Application - Flutter
 
-# Views - Frontend
+## Views - Frontend
 
-# Model - Backend
+## Model - Backend
 
 ```dart
 class Weather {
@@ -35,7 +35,7 @@ class Weather {
 }
 ```
 
-# API - Weather Data
+## API - Weather Data
 
 ```dart
 import 'dart:convert';
@@ -55,7 +55,7 @@ class WeatherApiClient {
 }
 ```
 
-# Firebase - Authentication
+## Firebase - Authentication
 
 > Firebase is our go-to web-database for quick app deployment. It’s easy to use and create.
 > 
