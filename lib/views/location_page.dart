@@ -16,40 +16,60 @@ class _LocationPageState extends State<LocationPage> {
   final cityNameController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(
-              height: 40,
+    return Center(
+      child: Scaffold(
+        backgroundColor: const Color(0xFFf9f9f9),
+        appBar: AppBar(
+          backgroundColor: const Color(0XFFf9f9f9),
+          elevation: 0.0,
+          title: const Text(
+            "Weather App",
+            style: TextStyle(color: Colors.black),
+          ),
+          centerTitle: true,
+          leading: IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.menu),
+            color: Colors.black,
+          ),
+        ),
+        drawer: const NavigationDrawer(),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 40,
+                ),
+                TextField(
+                  controller: cityNameController,
+                  cursorColor: Colors.white,
+                  textInputAction: TextInputAction.next,
+                  decoration: const InputDecoration(labelText: "City"),
+                ),
+                const SizedBox(
+                  height: 4,
+                ),
+                ElevatedButton.icon(
+                    onPressed: () => getWeatherInfoOfCity(),
+                    icon: const Icon(Icons.search_outlined),
+                    label: const Text("Search", style: TextStyle(fontSize: 24)),
+                    style: ElevatedButton.styleFrom(
+                        minimumSize: const Size.fromHeight(50))),
+                const SizedBox(
+                  height: 4,
+                ),
+                ElevatedButton.icon(
+                    onPressed: () => getWeatherInfoFromLocation(),
+                    icon: const Icon(Icons.map_outlined),
+                    label: const Text("Locate", style: TextStyle(fontSize: 24)),
+                    style: ElevatedButton.styleFrom(
+                        minimumSize: const Size.fromHeight(50))),
+              ],
             ),
-            TextField(
-              controller: cityNameController,
-              cursorColor: Colors.white,
-              textInputAction: TextInputAction.next,
-              decoration: const InputDecoration(labelText: "City"),
-            ),
-            const SizedBox(
-              height: 4,
-            ),
-            ElevatedButton.icon(
-                onPressed: () => getWeatherInfoOfCity(),
-                icon: const Icon(Icons.search_outlined),
-                label: const Text("Search", style: TextStyle(fontSize: 24)),
-                style: ElevatedButton.styleFrom(
-                    minimumSize: const Size.fromHeight(50))),
-            const SizedBox(
-              height: 4,
-            ),
-            ElevatedButton.icon(
-                onPressed: () => getWeatherInfoFromLocation(),
-                icon: const Icon(Icons.map_outlined),
-                label: const Text("Locate", style: TextStyle(fontSize: 24)),
-                style: ElevatedButton.styleFrom(
-                    minimumSize: const Size.fromHeight(50))),
-          ],
+          ),
         ),
       ),
     );
