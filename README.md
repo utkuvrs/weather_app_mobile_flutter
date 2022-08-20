@@ -2,22 +2,21 @@
 
 ## Views - Frontend
 
-![Login View](Weather%20Application%20-%20Flutter%202f759f7a0b664ea8aa26bcc2d42c5c54/Untitled.png)
+![Login View](imagesREADME/Untitled.png)
 
 Login View
 
-![Search View](Weather%20Application%20-%20Flutter%202f759f7a0b664ea8aa26bcc2d42c5c54/Untitled%201.png)
+![Search View](imagesREADME/Untitled%201.png)
 
 Search View
 
-![Home View](Weather%20Application%20-%20Flutter%202f759f7a0b664ea8aa26bcc2d42c5c54/Untitled%202.png)
+![Home View](imagesREADME/Untitled%202.png)
 
 Home View
 
 ## Model - Backend
 
 > Model, holds the values that were retrieved from an API call, these values are later used in the front-end to show/interact with the end-user.
-> 
 
 ```dart
 class Weather {
@@ -53,7 +52,6 @@ class Weather {
 ## API - Weather Data
 
 > Requesting JSON data from our API in this case **openweathermap** and decoding it to `Weather` model in `model/weather_model.dart`
-> 
 
 ```dart
 import 'dart:convert';
@@ -76,7 +74,6 @@ class WeatherApiClient {
 ## API - Location Data
 
 > Locating the end-user via the end-users’ latitude and longitude. Used `geolocator`.
-> 
 
 ```dart
 Future getWeatherInfoFromLocation() async {
@@ -130,7 +127,7 @@ Future getWeatherInfoFromLocation() async {
 ## Firebase - Authentication
 
 > Firebase is our go-to web-database for quick app deployment. It’s easy to use and create.
-> 
+
 1. Let’s initialize our Firebase instance
 
 ```dart
