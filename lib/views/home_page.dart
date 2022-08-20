@@ -79,6 +79,56 @@ class _HomePageState extends State<HomePage> {
 
                   additionalInformation("${data.wind}", "${data.humidity}",
                       "${data.pressure}", "${data.feelsLike}"),
+                  Center(
+                    child: Container(
+                      height: 100,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          Container(
+                            width: 200,
+                            color: Colors.blue[600],
+                            child: const Center(
+                                child: Text(
+                              'Item 1',
+                              style:
+                                  TextStyle(fontSize: 18, color: Colors.white),
+                            )),
+                          ),
+                          Container(
+                            width: 200,
+                            color: Colors.green[500],
+                            child: const Center(
+                                child: Text(
+                              'Item 2',
+                              style:
+                                  TextStyle(fontSize: 18, color: Colors.white),
+                            )),
+                          ),
+                          Container(
+                            width: 200,
+                            color: Colors.orange[400],
+                            child: const Center(
+                                child: Text(
+                              'Item 3',
+                              style:
+                                  TextStyle(fontSize: 18, color: Colors.white),
+                            )),
+                          ),
+                          Container(
+                            width: 200,
+                            color: Colors.cyan[300],
+                            child: const Center(
+                                child: Text(
+                              'Item 4',
+                              style:
+                                  TextStyle(fontSize: 18, color: Colors.white),
+                            )),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
                 ],
               );
             } else if (snapshot.connectionState == ConnectionState.waiting) {
@@ -118,10 +168,6 @@ class NavigationDrawer extends StatelessWidget {
         child: Wrap(
           runSpacing: 16,
           children: [
-            ListTile(
-                leading: const Icon(Icons.home_outlined),
-                title: const Text("Home"),
-                onTap: () => {}),
             ListTile(
               leading: const Icon(Icons.search_outlined),
               title: const Text("Search"),
