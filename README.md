@@ -2,6 +2,18 @@
 
 ## Views - Frontend
 
+![Login View](Weather%20Application%20-%20Flutter%202f759f7a0b664ea8aa26bcc2d42c5c54/Untitled.png)
+
+Login View
+
+![Search View](Weather%20Application%20-%20Flutter%202f759f7a0b664ea8aa26bcc2d42c5c54/Untitled%201.png)
+
+Search View
+
+![Home View](Weather%20Application%20-%20Flutter%202f759f7a0b664ea8aa26bcc2d42c5c54/Untitled%202.png)
+
+Home View
+
 ## Model - Backend
 
 > Model, holds the values that were retrieved from an API call, these values are later used in the front-end to show/interact with the end-user.
@@ -61,6 +73,60 @@ class WeatherApiClient {
 }
 ```
 
+## API - Location Data
+
+> Locating the end-user via the end-users’ latitude and longitude. Used `geolocator`.
+> 
+
+```dart
+Future getWeatherInfoFromLocation() async {
+    // First, check if GPS is enabled
+    bool servicestatus = await Geolocator.isLocationServiceEnabled();
+
+    if (servicestatus) {
+      print("GPS service is enabled");
+    } else {
+      print("GPS service is disabled.");
+    }
+
+    // Secondly, check if perms are given by end-user for the location
+
+    LocationPermission permission = await Geolocator.checkPermission();
+
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        print('Location permissions are denied');
+      } else if (permission == LocationPermission.deniedForever) {
+        print("'Location permissions are permanently denied");
+      }
+      // If end-user gives permission, get position of the end-user.
+      else {
+        print("GPS Location service is granted");
+        Position position = await Geolocator.getCurrentPosition(
+            desiredAccuracy: LocationAccuracy.low);
+        print(position.longitude);
+        print(position.latitude);
+        widget.weather = WeatherApiClient().getCurrentWeatherFromLatAndLon(
+            position.latitude, position.longitude);
+        // Lastly render home page.
+        renderHomePage();
+      }
+    } else {
+      print("GPS Location permission granted.");
+
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.low);
+      print(position.longitude);
+      print(position.latitude);
+      widget.weather = WeatherApiClient().getCurrentWeatherFromLatAndLon(
+          position.latitude, position.longitude);
+      // Lastly render home page.
+      renderHomePage();
+    }
+  }
+```
+
 ## Firebase - Authentication
 
 > Firebase is our go-to web-database for quick app deployment. It’s easy to use and create.
@@ -108,3 +174,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 ```
+
+### Missing Features:
+
+1. Registering the user
+2. Animations
+3. A better UI design can be made with images and/or gifs that could make the application look much better.
