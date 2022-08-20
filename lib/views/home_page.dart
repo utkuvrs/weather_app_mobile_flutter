@@ -16,9 +16,11 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+Weather data = Weather();
+
 class _HomePageState extends State<HomePage> {
   WeatherApiClient client = WeatherApiClient();
-  Weather data = Weather();
+
   @override
   void initState() {
     super.initState();
@@ -124,8 +126,7 @@ class NavigationDrawer extends StatelessWidget {
               leading: const Icon(Icons.search_outlined),
               title: const Text("Search"),
               onTap: () => Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                      builder: (context) => const LocationPage())),
+                  MaterialPageRoute(builder: (context) => LocationPage())),
             ),
             ListTile(
               leading: const Icon(Icons.door_sliding_outlined),
