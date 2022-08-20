@@ -62,8 +62,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   // Let's create custom widgets for the app.
 
-                  currentWeather(Icons.wb_sunny_rounded, "${data.temp}",
-                      "${data.cityName}"),
+                  currentWeather("${data.temp}", "${data.cityName}"),
                   const SizedBox(height: 60),
                   const Text(
                     "Additional Information",
