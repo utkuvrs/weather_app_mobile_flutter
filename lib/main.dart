@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:weather_app_mobile_flutter/views/home_page.dart';
 import 'package:weather_app_mobile_flutter/views/location_page.dart';
 import 'package:weather_app_mobile_flutter/widgets/login_widget.dart';
 
@@ -28,11 +27,9 @@ class _LoginPageState extends State<LoginPage> {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return LocationPage(
-              weather: data,
-            );
+            return LocationPage();
           } else {
-            return LoginWidget();
+            return const LoginWidget();
           }
         },
       ),
