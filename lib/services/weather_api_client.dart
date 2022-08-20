@@ -14,7 +14,7 @@ class WeatherApiClient {
   }
 
   Future<Weather>? getCurrentWeatherFromLatAndLon(
-      String? lat, String? lon) async {
+      double lat, double lon) async {
     var endPoint = Uri.parse(
         "https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=9831b85e6410d2ae724f4f85ddbbde84&units=metric");
 
