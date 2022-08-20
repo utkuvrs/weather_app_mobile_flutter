@@ -123,9 +123,13 @@ class _LocationPageState extends State<LocationPage> {
   }
 
   Future getWeatherInfoOfCity() async {
-    widget.weather =
-        WeatherApiClient().getCurrentWeather(cityNameController.text.trim());
-    renderHomePage();
+    try {
+      widget.weather =
+          WeatherApiClient().getCurrentWeather(cityNameController.text.trim());
+      renderHomePage();
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future renderHomePage() async {
