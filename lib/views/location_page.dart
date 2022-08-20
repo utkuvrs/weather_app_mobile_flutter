@@ -1,30 +1,117 @@
 import 'package:flutter/material.dart';
-import 'package:geocoder2/geocoder2.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:weather_app_mobile_flutter/services/weather_api_client.dart';
+
 import 'package:weather_app_mobile_flutter/model/weather_model.dart';
 import 'home_page.dart';
 
 class LocationPage extends StatefulWidget {
-  late GeoData geoData;
-  final Weather weather;
-  LocationPage({Key? key, required this.weather}) : super(key: key);
+  late Future<Weather>? weather;
+  LocationPage({Key? key}) : super(key: key);
   @override
   State<LocationPage> createState() => _LocationPageState();
 }
 
 class _LocationPageState extends State<LocationPage> {
+  final cityNameController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: HomePage(
-        locationName: widget.geoData.city,
+    return Scaffold(
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(
+              height: 40,
+            ),
+            TextField(
+              controller: cityNameController,
+              cursorColor: Colors.white,
+              textInputAction: TextInputAction.next,
+              decoration: const InputDecoration(labelText: "City"),
+            ),
+            const SizedBox(
+              height: 4,
+            ),
+            ElevatedButton.icon(
+                onPressed: () => getWeatherInfoOfCity(),
+                icon: const Icon(Icons.search_outlined),
+                label: const Text("Search", style: TextStyle(fontSize: 24)),
+                style: ElevatedButton.styleFrom(
+                    minimumSize: const Size.fromHeight(50))),
+            const SizedBox(
+              height: 4,
+            ),
+            ElevatedButton.icon(
+                onPressed: () => getWeatherInfoFromLocation(),
+                icon: const Icon(Icons.map_outlined),
+                label: const Text("Locate", style: TextStyle(fontSize: 24)),
+                style: ElevatedButton.styleFrom(
+                    minimumSize: const Size.fromHeight(50))),
+          ],
+        ),
       ),
     );
   }
 
-  Future getLocation() async {
-    widget.geoData = await Geocoder2.getDataFromCoordinates(
-        latitude: (widget.weather.latitude)!,
-        longitude: (widget.weather.longitude)!,
-        googleMapApiKey: "AIzaSyDeGZZPpMXrcV6YNkpjemWTE1i3HFMNCKI");
+  Future getWeatherInfoFromLocation() async {
+    // First, check if GPS is enabled
+    bool servicestatus = await Geolocator.isLocationServiceEnabled();
+
+    if (servicestatus) {
+      print("GPS service is enabled");
+    } else {
+      print("GPS service is disabled.");
+    }
+
+    // Secondly, check if perms are given by end-user for the location
+
+    LocationPermission permission = await Geolocator.checkPermission();
+
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        print('Location permissions are denied');
+      } else if (permission == LocationPermission.deniedForever) {
+        print("'Location permissions are permanently denied");
+      }
+      // If end-user gives permission, get position of the end-user.
+      else {
+        print("GPS Location service is granted");
+        Position position = await Geolocator.getCurrentPosition(
+            desiredAccuracy: LocationAccuracy.low);
+        print(position.longitude);
+        print(position.latitude);
+        widget.weather = WeatherApiClient().getCurrentWeatherFromLatAndLon(
+            position.latitude, position.longitude);
+        // Lastly render home page.
+        renderHomePage();
+      }
+    } else {
+      print("GPS Location permission granted.");
+
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      print(position.longitude);
+      print(position.latitude);
+      widget.weather = WeatherApiClient().getCurrentWeatherFromLatAndLon(
+          position.latitude, position.longitude);
+      // Lastly render home page.
+      renderHomePage();
+    }
+  }
+
+  Future getWeatherInfoOfCity() async {
+    widget.weather =
+        WeatherApiClient().getCurrentWeather(cityNameController.text.trim());
+    renderHomePage();
+  }
+
+  Future renderHomePage() async {
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => HomePage(
+              locationName: cityNameController.text.trim(),
+            )));
   }
 }
