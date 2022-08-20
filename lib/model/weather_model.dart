@@ -26,7 +26,7 @@ class Weather {
     temp = json["main"]["temp"];
     wind = json["wind"]["speed"].toDouble();
     humidity = json["main"]["humidity"];
-    feelsLike = json["main"]["feels_like"];
+    feelsLike = json["main"]["feels_like"].toDouble();
     pressure = json["main"]["pressure"];
     latitude = json["coord"]["lat"];
     longitude = json["coord"]["lon"];
