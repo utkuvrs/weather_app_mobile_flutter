@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:weather_app_mobile_flutter/services/weather_api_client.dart';
@@ -23,7 +25,7 @@ class _LocationPageState extends State<LocationPage> {
           backgroundColor: const Color(0XFFf9f9f9),
           elevation: 0.0,
           title: const Text(
-            "Weather App",
+            "Search",
             style: TextStyle(color: Colors.black),
           ),
           centerTitle: true,
@@ -112,7 +114,7 @@ class _LocationPageState extends State<LocationPage> {
       print("GPS Location permission granted.");
 
       Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
+          desiredAccuracy: LocationAccuracy.low);
       print(position.longitude);
       print(position.latitude);
       widget.weather = WeatherApiClient().getCurrentWeatherFromLatAndLon(

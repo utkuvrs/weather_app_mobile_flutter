@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: const Color(0XFFf9f9f9),
           elevation: 0.0,
           title: const Text(
-            "Weather App",
+            "Home",
             style: TextStyle(color: Colors.black),
           ),
           centerTitle: true,
